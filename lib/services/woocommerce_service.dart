@@ -78,7 +78,8 @@ class WooCommerceService {
     required String paymentMethodTitle,
     String? transactionId,
   }) async {
-    final endpoint = '${AppConfig.baseUrl}/wp-json/wc/v3/orders';
+    final endpoint =
+        '${AppConfig.baseUrl}/wp-json/wc/v3/orders?consumer_key=${AppConfig.consumerKey}&consumer_secret=${AppConfig.consumerSecret}';
 
     final orderData = {
       "payment_method": paymentMethod,

@@ -127,9 +127,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     List<Map<String, dynamic>> lineItems = cart.items.values.map((item) {
       return {
         "product_id": item.product.id,
-        "name": item.product.name,
         "quantity": item.quantity,
-        "price": item.product.priceNumeric,
       };
     }).toList();
 
