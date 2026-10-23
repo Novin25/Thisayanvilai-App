@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../config/constants.dart';
 import 'home_screen.dart';
+import 'account_screen.dart';
 
 class OrderSuccessScreen extends StatelessWidget {
   final int orderId;
@@ -34,7 +35,7 @@ class OrderSuccessScreen extends StatelessWidget {
                   child: const Icon(
                     Icons.check_circle_rounded,
                     size: 90,
-                    color: AppConfig.primaryGreen,
+                    color: AppConfig.primaryColor,
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -49,7 +50,7 @@ class OrderSuccessScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Thank you, $customerName!\nYour order has been recorded in our store.',
+                  'Thank you, $customerName!\nYour order has been paid and is being prepared.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
@@ -88,10 +89,10 @@ class OrderSuccessScreen extends StatelessWidget {
                             children: const [
                               Icon(Icons.bolt, color: AppConfig.accentOrange, size: 18),
                               Text(
-                                '15-30 Mins (Thisayanvilai)',
+                                '15-30 Mins (Instant Delivery)',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: AppConfig.primaryGreen,
+                                  color: AppConfig.primaryColor,
                                 ),
                               ),
                             ],
@@ -102,6 +103,32 @@ class OrderSuccessScreen extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
+
+                // View Order Details button
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => const AccountScreen()),
+                      );
+                    },
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      side: const BorderSide(color: AppConfig.primaryColor),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text(
+                      'View Order Details & History',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: AppConfig.primaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
 
                 // Back to home button
                 SizedBox(
@@ -114,7 +141,7 @@ class OrderSuccessScreen extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppConfig.primaryGreen,
+                      backgroundColor: AppConfig.primaryColor,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),

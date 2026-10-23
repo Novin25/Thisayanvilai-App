@@ -7,6 +7,7 @@ import '../services/woocommerce_service.dart';
 import '../services/cart_provider.dart';
 import '../widgets/product_card.dart';
 import 'cart_screen.dart';
+import 'account_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -125,6 +126,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.person_outline_rounded, color: AppConfig.textDark, size: 26),
+            tooltip: 'My Account & Orders',
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const AccountScreen()),
+              );
+            },
+          ),
           IconButton(
             icon: Stack(
               clipBehavior: Clip.none,
