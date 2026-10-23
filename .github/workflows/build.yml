@@ -19,15 +19,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Set up Flutter
+      - name: Set up Flutter (Stable 3.22.2)
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.22.2'
           channel: 'stable'
           cache: true
-
-      - name: Prepare Android Project
-        run: |
-          flutter create . --platforms=android --org com.thisayanvilai.shop
 
       - name: Install Dependencies
         run: flutter pub get
