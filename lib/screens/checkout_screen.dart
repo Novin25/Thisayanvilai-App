@@ -77,17 +77,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
     setState(() => _isProcessing = true);
 
-    if (_selectedPaymentMethod == 'cod') {
-      _placeOrderInWooCommerce(
-        paymentMethod: 'cod',
-        paymentTitle: 'Cash on Delivery',
-      );
-      return;
-    }
-
-    // Amount in paise for Razorpay
-    int amountInPaise = (cart.totalAmount * 100).toInt();
-
     var options = {
       'key': AppConfig.razorpayKeyId,
       'amount': amountInPaise,
@@ -98,7 +87,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         'name': _nameController.text.trim(),
       },
       'theme': {
-        'color': '#1E824C',
+        'color': '#E8363C',
       },
       'external': {
         'wallets': ['paytm']
@@ -318,26 +307,40 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           ],
                         ),
                         const SizedBox(height: 12),
-                        RadioListTile<String>(
-                          value: 'razorpay',
-                          groupValue: _selectedPaymentMethod,
-                          activeColor: AppConfig.primaryGreen,
-                          contentPadding: EdgeInsets.zero,
-                          title: const Text('UPI / Cards / NetBanking (Razorpay)'),
-                          subtitle: const Text('GPay, PhonePe, Paytm, Debit/Credit Card'),
-                          secondary: const Icon(Icons.bolt, color: AppConfig.accentOrange),
-                          onChanged: (val) => setState(() => _selectedPaymentMethod = val!),
-                        ),
-                        Divider(color: Colors.grey.shade200),
-                        RadioListTile<String>(
-                          value: 'cod',
-                          groupValue: _selectedPaymentMethod,
-                          activeColor: AppConfig.primaryGreen,
-                          contentPadding: EdgeInsets.zero,
-                          title: const Text('Cash on Delivery (COD)'),
-                          subtitle: const Text('Pay when grocery arrives'),
-                          secondary: const Icon(Icons.money, color: Colors.green),
-                          onChanged: (val) => setState(() => _selectedPaymentMethod = val!),
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: AppConfig.lightGreen,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: AppConfig.primaryGreen.withOpacity(0.3)),
+                          ),
+                          child: Row(
+                            children: const [
+                              Icon(Icons.verified_user_rounded, color: AppConfig.primaryGreen, size: 28),
+                              SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'UPI / Cards / NetBanking (Razorpay)',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                        color: AppConfig.textDark,
+                                      ),
+                                    ),
+                                    SizedBox(height: 2),
+                                    Text(
+                                      'GPay, PhonePe, Paytm, Debit/Credit Cards',
+                                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Icon(Icons.check_circle, color: AppConfig.primaryGreen, size: 22),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -422,9 +425,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
             child: Text(
-              _selectedPaymentMethod == 'razorpay'
-                  ? 'Pay ₹${cart.totalAmount.toStringAsFixed(2)} & Place Order'
-                  : 'Confirm Order (Cash on Delivery)',
+              'Pay ₹${cart.totalAmount.toStringAsFixed(2)} & Place Order',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

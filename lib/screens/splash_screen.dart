@@ -25,28 +25,30 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppConfig.primaryGreen,
+      backgroundColor: AppConfig.primaryColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(20),
+              width: 110,
+              height: 110,
               decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
+                borderRadius: BorderRadius.circular(22),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
+                    color: Colors.black.withOpacity(0.18),
                     blurRadius: 15,
-                    offset: const Offset(0, 5),
+                    offset: const Offset(0, 6),
                   ),
                 ],
               ),
-              child: const Icon(
-                Icons.shopping_basket_rounded,
-                size: 70,
-                color: AppConfig.primaryGreen,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(22),
+                child: Image.asset(
+                  'assets/images/app_logo.png',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(height: 24),
