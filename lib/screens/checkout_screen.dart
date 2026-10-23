@@ -77,6 +77,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
     setState(() => _isProcessing = true);
 
+    int amountInPaise = (cart.totalAmount * 100).toInt();
+
     var options = {
       'key': AppConfig.razorpayKeyId,
       'amount': amountInPaise,
